@@ -9,14 +9,14 @@ This microservice has an architecture oriented to events. Also, it's an endpoint
 
 ## Getting started
 ### Preprocessing 
-I've developed a simple component for processing `trips.csv` file. The target was could transforming csv file to `INSERT` SQL statements. This one I make in `data/getSQLStatement.py` pipeline. If you want to run this pipeline using the following command:
+I've developed a simple component for processing `trips.csv` file. The target was could transforming csv file to `INSERT` SQL statements. This one I make in [data/getSQLStatement.py](https://github.com/lbarreraabarca/neuralworks-challenge/blob/main/data/getSQLStatement.py) pipeline. If you want to run this pipeline using the following command:
 
 ```bash
 python data/getSQLStatement.py
 ```
 
 ### Prepare environment
-You need to create a database. Therefore, we'll docker for create a container that has a Postgres database. It's therefore you must run te following command:
+You need to create a database. Therefore, we'll docker for create a container that has a Postgres database. It's therefore you must run te following command [database/run.sh](https://github.com/lbarreraabarca/neuralworks-challenge/blob/main/database/run.sh):
 
 ```bash
 bash database/run.sh
@@ -40,7 +40,7 @@ python App.py
 
 ## Inserting data through oriented to events architecture
 For the question, *Automated process for ingest and store data on demand*. I've developed an endpoint that allows take a request and insert to database. 
-The endpoint where you could insert events is `http://127.0.0.1:8080/api/v1/trip-event/insert`. As well, the payload structure is:
+The endpoint where you could insert events is [localhost:8080/api/v1/trip-event/insert](http://127.0.0.1:8080/api/v1/trip-event/insert). As well, the payload structure is:
 ```json
 {
     "region": "Prague",
@@ -72,7 +72,7 @@ You should receive a response something like that:
 ```
 
 ## Weekly average of trip by region
-For the question, *A service allows returns the weekly average for a bounding box and the region*. I've developed an endpoint that allows take a request and make a query over database. The endpoint where you could apply the query is `http://127.0.0.1:8080/api/v1/trip-event/trip-per-week`. Also, the payload structure is:
+For the question, *A service allows returns the weekly average for a bounding box and the region*. I've developed an endpoint that allows take a request and make a query over database. The endpoint where you could apply the query is [localhost:8080/api/v1/trip-event/trip-per-week](http://127.0.0.1:8080/api/v1/trip-event/trip-per-week). Also, the payload structure is:
 
 ```json
 {
@@ -116,3 +116,8 @@ You should receive a response something like that:
 ```
 
 ## Scalabilty and Cloud environment
+
+For solution be scalable I'll let avalaible a cloud solution. For the on demand ingest events I'll use a Pub/Sub products. A topic where you should send the event. Then, this topic will be connected to Pub/Sub Subscription. This subscription  will be push type and will delivered the events to Cloud Run endpoint. This endpoint should store the data into CloudSQL database. Also, the endpoint may receive request from Internet through token bearer authentification. 
+
+![High level design](https://raw.githubusercontent.com/lbarreraabarca/neuralworks-challenge/main/images/high-level-design.png)
+
