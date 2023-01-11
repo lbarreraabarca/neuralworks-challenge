@@ -94,5 +94,25 @@ curl --location --request POST 'http://127.0.0.1:8080/api/v1/trip-event/trip-per
     "upper_coord": "POINT (180 90)"
 }'
 ```
+You should receive a response something like that:
+
+```json
+{
+    "response": [
+        {
+            "region": "Hamburg",
+            "trip_amount_per_week": "5.6000000000000000"
+        },
+        {
+            "region": "Prague",
+            "trip_amount_per_week": "6.8000000000000000"
+        },
+        {
+            "region": "Turin",
+            "trip_amount_per_week": "7.6000000000000000"
+        }
+    ]
+}
+```
 
 ## Scalabilty and Cloud environment
