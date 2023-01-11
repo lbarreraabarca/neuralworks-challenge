@@ -115,7 +115,7 @@ You should receive a response something like that:
 }
 ```
 
-## Scalabilty and Cloud environment
+## Scalability and Cloud environment
 
 For solution be scalable I'll let avalaible a cloud solution. For the on demand ingest events I'll use a Pub/Sub products. A topic where you should send the event. Then, this topic will be connected to Pub/Sub Subscription. This subscription  will be push type and will delivered the events to Cloud Run endpoint. This endpoint should store the data into CloudSQL database. Also, the endpoint may receive request from Internet through token bearer authentification. 
 
